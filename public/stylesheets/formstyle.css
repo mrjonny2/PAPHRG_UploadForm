@@ -1,0 +1,138 @@
+
+body {
+	background: #009FE3;
+	font-family: 'Lato', sans-serif;
+	color: #FDFCFB;
+	text-align: center;
+}
+
+
+form {
+	width: 450px;
+	margin: 1% auto;
+}
+
+
+.header {
+	font-size: 35px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+}
+
+a {
+	color: #FDFCFB;
+	text-transform: uppercase;
+}
+
+
+.description {
+	font-size: 14px;
+	color: #FDFCFB;
+	letter-spacing: 1px;
+	line-height: 1.3em;
+	margin: -2px 0 45px;
+}
+
+
+.input {
+	display: flex;
+	align-items: center;
+}
+
+.button {
+	height: 44px;
+	border: none;
+}
+
+
+#fullName {
+	width: 75%;
+	background: #FDFCFB;
+	font-family: inherit;
+	color: #737373;
+	letter-spacing: 1px;
+	text-indent: 5%;
+	border-radius: 5px 5px 0 0;
+}
+#fileType {
+	width: 75%;
+	background: #FDFCFB;
+	font-family: inherit;
+	color: #737373;
+	letter-spacing: 1px;
+	text-indent: 5%;
+	border-radius: 0 0 0px 0px;
+}
+#pbcontainer {
+	width: 75%;
+	background: #FDFCFB;
+	font-family: inherit;
+	color: #737373;
+	letter-spacing: 1px;
+	text-indent: 5%;
+	border-radius: 0 0 5px 5px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 44px;
+}
+#progressbar {
+	position: relative;
+	overflow:hidden;
+	width: 0%;
+	height: 44px;
+	background-color: #E40520;
+	border-radius: 0 0 5px 5px;
+}
+#progress {
+	position: relative;
+	z-index: 3;
+	color: #FDFCFB;
+}
+
+#submit {
+	width: 25%;
+	height: 46px;
+	background: #E86C8D;
+	font-family: inherit;
+	font-weight: bold;
+	color: inherit;
+	letter-spacing: 1px;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+	transition: background .3s ease-in-out;
+}
+
+
+#submit:hover {
+	background: #d45d7d;
+}
+
+.fileUpload {
+	width: 25%;
+	height: 46px;
+	background: #E86C8D;
+	font-family: inherit;
+	font-weight: bold;
+	color: inherit;
+	letter-spacing: 1px;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+	transition: background .3s ease-in-out;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+input:focus {
+	outline: none;
+	outline: 2px solid #E86C8D;
+	box-shadow: 0 0 2px #E86C8D;
+}

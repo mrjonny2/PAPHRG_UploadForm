@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	form(id='upload_form', action='/', method='post', enctype='multipart/form-data')
+		.header
+			p File Upload
+		.description
+			p
+			| After your file has been uploaded, please contact
+			a(href="mailto:paphrg@lboro.ac.uk")  paphrg@lboro.ac.uk
+			|  if you have any questions.
+
+		input#fullName.button(type='text', name='fullName', placeholder=' Full Name', required)
+		br
+		input#fileType.button(type='text', name='fileType', placeholder=' File Type', required)
+		br
+		#pbcontainer
+			#progressbar
+			#progress
+				| 0%
+		br
+		input(id='file_field', type='file', name='upload', multiple='multiple', required)
+	#target
