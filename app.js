@@ -73,14 +73,15 @@ app.post('/', function(req, res) {
 				fileType = charStrip(fields[1][1])
 				originalFileName = (files[0][1].name)
 				strippedFileName = charStrip(files[0][1].name)
-				newFileName = './uploads/' + fullName + '_' + fileType + '_' + originalFileName
+				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + originalFileName
 				logger.info('fullName = ' + fullName);
 				logger.info('fileType = ' + fileType);
 				logger.info('fileName = ' + originalFileName);
 				fs.rename(files[0][1].path, newFileName, function (err) {
-					if (err) throw err;
+					if (err){
 						logger.info('err = ' + err);
-					});
+					}
+				});
 				res.render('upload', {fields: fields, files: files});
 			});
 		form.parse(req, function(){
