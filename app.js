@@ -1,3 +1,25 @@
+var winston = require('winston');
+
+// Requiring `winston-papertrail` will expose
+// `winston.transports.Papertrail`
+//
+require('winston-papertrail').Papertrail;
+
+var logger = new winston.Logger({
+	transports: [
+		new winston.transports.Papertrail({
+			host: 'logs3.papertrailapp.com',
+			port: 11359,
+			handleExceptions: true,
+			inlineMeta: true,
+			logFormat: function(level, message) {
+				return '<<<' + level + '>>> ' + message;
+			}
+		})
+	]
+});
+
+
 var express     = require('express'),
 	http        = require('http'),
 	app         = express(),
@@ -5,6 +27,7 @@ var express     = require('express'),
 	io          = require('socket.io').listen(server).set('log level', 1),
 	formidable  = require('formidable');
 var fs = require("fs");
+
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 80);
@@ -29,14 +52,14 @@ app.post('/', function(req, res) {
 			files           = [],
 			fields          = [];
 
-		form.uploadDir  = __dirname + '/uploads';
+		form.uploadDir  = '/googleDrive/MEASURE15/OnlineUploads';
 		form
 			.on('field', function(field, value) {
-				//console.log(field, value);
+				//logger.info(field, value);
 				fields.push([field, value]);
 			})
 			.on('file', function(field, file) {
-				//console.log(field, file);
+				//logger.info(field, file);
 				files.push([field, file]);
 			})
 			.on('progress', function(bytesReceived, bytesExpected) {
@@ -45,28 +68,28 @@ app.post('/', function(req, res) {
 				io.sockets.emit(req.session.id, {filesize: filesize, progress: progress});
 			})
 			.on('end', function() {
-				console.log('successfully uploaded!');
+				logger.info('successfully uploaded!');
 				fullName = charStrip(fields[0][1])
 				fileType = charStrip(fields[1][1])
 				originalFileName = (files[0][1].name)
 				strippedFileName = charStrip(files[0][1].name)
 				newFileName = './uploads/' + fullName + '_' + fileType + '_' + originalFileName
-				console.log('fullName = ' + fullName);
-				console.log('fileType = ' + fileType);
-				console.log('fileName = ' + originalFileName);
+				logger.info('fullName = ' + fullName);
+				logger.info('fileType = ' + fileType);
+				logger.info('fileName = ' + originalFileName);
 				fs.rename(files[0][1].path, newFileName, function (err) {
 					if (err) throw err;
-						console.log('err = ' + err);
+						logger.info('err = ' + err);
 					});
 				res.render('upload', {fields: fields, files: files});
 			});
 		form.parse(req, function(){
-			console.log(files[0][1].path)
+			logger.info(files[0][1].path)
 		});
 });
 
 server.listen(app.get('port'), function(){
-	console.log("Express server listening on port " + app.get('port'));
+	logger.info("Express server listening on port " + app.get('port'));
 });
 
 

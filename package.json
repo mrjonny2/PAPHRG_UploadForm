@@ -7,8 +7,10 @@
   },
   "dependencies": {
     "express": "3.0.0beta7",
+    "formidable": "*",
     "jade": "*",
     "socket.io": "*",
-    "formidable": "*"
+    "winston": "^1.0.1",
+    "winston-papertrail": "^1.0.1"
   }
 }
