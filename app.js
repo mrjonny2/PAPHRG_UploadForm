@@ -52,7 +52,8 @@ app.post('/', function(req, res) {
 			files           = [],
 			fields          = [];
 
-		form.uploadDir  = '/googleDrive/MEASURE15/OnlineUploads';
+		var uploadDir  = '/googleDrive/MEASURE15/OnlineUploads';
+		form.uploadDir  = uploadDir;
 		form
 			.on('field', function(field, value) {
 				//console.log(field, value);
