@@ -10,7 +10,7 @@ var logger = new winston.Logger({
 		new winston.transports.Papertrail({
 			host: 'logs3.papertrailapp.com',
 			port: 11359,
-			handleExceptions: true,
+			handleExceptions: false,
 			inlineMeta: true,
 			logFormat: function(level, message) {
 				return '<<<' + level + '>>> ' + message;
