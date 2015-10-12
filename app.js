@@ -69,7 +69,7 @@ app.post('/', function(req, res) {
 				io.sockets.emit(req.session.id, {filesize: filesize, progress: progress});
 			})
 			.on('end', function() {
-				logger.info('successfully uploaded!');
+				logger.info('successful upload!');
 				fullName = charStrip(fields[0][1])
 				fileType = charStrip(fields[1][1])
 				originalFileName = (files[0][1].name)
@@ -81,6 +81,9 @@ app.post('/', function(req, res) {
 				fs.rename(files[0][1].path, newFileName, function (err) {
 					if (err){
 						logger.error('err = ' + err);
+					}
+					else{
+						logger.info('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
 					}
 				});
 				res.render('upload', {fields: fields, files: files});
