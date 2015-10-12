@@ -23,7 +23,7 @@ var logger = new winston.Logger({
 		new winston.transports.Papertrail({
 			host: 'logs3.papertrailapp.com',
 			port: 11359,
-			handleExceptions: true,
+			handleExceptions: false,
 			inlineMeta: false,
 			logFormat: function(level, message) {
 				return '<<<' + level + '>>> ' + message;
@@ -97,7 +97,7 @@ app.post('/', function(req, res) {
 						logger.error('err = ' + err);
 					}
 					else{
-						logger.information('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+						logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
 					}
 				});
 				res.render('upload', {fields: fields, files: files});
