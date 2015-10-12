@@ -9,11 +9,13 @@ var myCustomLevels = {
 	levels: {
 		info: 0,
 		upload: 1,
-		error: 2,
+		debug: 2,
+		error: 3,
 	},
 	colors: {
 		info: 'blue',
 		upload: 'green',
+		debug: 'blue',
 		error: 'red'
 	}
 };
