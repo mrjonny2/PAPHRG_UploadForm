@@ -97,7 +97,7 @@ app.post('/', function(req, res) {
 						logger.error('err = ' + err);
 					}
 					else{
-						logger.upload('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+						logger.information('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
 					}
 				});
 				res.render('upload', {fields: fields, files: files});
