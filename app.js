@@ -5,6 +5,19 @@ var winston = require('winston');
 //
 require('winston-papertrail').Papertrail;
 
+var myCustomLevels = {
+	levels: {
+		info: 0,
+		upload: 1,
+		error: 2,
+	},
+	colors: {
+		info: 'blue',
+		upload: 'green',
+		error: 'red'
+	}
+};
+
 var logger = new winston.Logger({
 	transports: [
 		new winston.transports.Papertrail({
@@ -16,7 +29,8 @@ var logger = new winston.Logger({
 				return '<<<' + level + '>>> ' + message;
 			}
 		})
-	]
+	],
+	levels: myCustomLevels.levels
 });
 
 
