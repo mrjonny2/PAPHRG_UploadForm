@@ -54,7 +54,7 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(express.static(__dirname + '/public'));
 	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'xxx', store: new express.session.MemoryStore({ reapInterval: -1 }) }));
+	app.use(express.session({ secret: 'xxyidooidfuie78889duvdjnsdf9ex', store: new express.session.MemoryStore({ reapInterval: -1 }) }));
 	app.use(express.errorHandler());
 });
 
@@ -97,9 +97,11 @@ app.post('/', function(req, res) {
 				fs.rename(files[0][1].path, newFileName, function (err) {
 					if (err){
 						logger.error('err = ' + err);
+						console.log('err = ' + err)
 					}
 					else{
 						logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+						//console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
 					}
 				});
 				res.render('upload', {fields: fields, files: files});

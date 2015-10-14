@@ -9,6 +9,8 @@ block content
 			| After your file has been uploaded, please contact
 			a(href="mailto:paphrg@lboro.ac.uk")  paphrg@lboro.ac.uk
 			|  if you have any questions.
+			br
+			| Please fill in your name and file type before selecting your file
 
 		input#fullName.button(type='text', name='fullName', placeholder=' Full Name', required)
 		br
@@ -19,5 +21,16 @@ block content
 			#progress
 				| 0%
 		br
-		input(id='file_field', type='file', name='upload', multiple='multiple', required)
+		input(id='file_field', type='file', name='upload', multiple='multiple', disabled required)
 	#target
+	script(type='text/javascript').
+		document.getElementById("fullName").onchange = function() {
+			if(document.getElementById('fullName').value.length != 0 && document.getElementById('fileType').value.length != 0 ) {
+				document.getElementById("file_field").disabled = false;
+			}
+		}
+		document.getElementById("fileType").onchange = function() {
+			if(document.getElementById('fullName').value.length != 0 && document.getElementById('fileType').value.length != 0 ) {
+				document.getElementById("file_field").disabled = false;
+			}
+		}
