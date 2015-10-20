@@ -72,12 +72,14 @@ app.post('/', function(req, res) {
 		form.uploadDir  = uploadDir;
 		form
 			.on('field', function(field, value) {
-				//console.log(field, value);
+				console.log(field, value);
 				fields.push([field, value]);
 			})
 			.on('file', function(field, file) {
-				//console.log(field, file);
+				console.log(field, file);
 				files.push([field, file]);
+				logger.info(files)
+				console.log(files[0]);
 			})
 			.on('progress', function(bytesReceived, bytesExpected) {
 				var filesize = (bytesExpected / 1024 / 1024).toFixed(1);
@@ -107,7 +109,10 @@ app.post('/', function(req, res) {
 				res.render('upload', {fields: fields, files: files});
 			});
 		form.parse(req, function(){
+			logger.info(files)
 			logger.info(files[0][1].path)
+			console.log(files)
+			console.log(files[0][1].path)
 		});
 });
 
