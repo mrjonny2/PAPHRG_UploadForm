@@ -118,6 +118,14 @@ app.post('/', function(req, res) {
 
 server.listen(app.get('port'), function(){
 	logger.info("Express server listening on port " + app.get('port'));
+}).on('error', function(err){
+    console.log('on error handler');
+    console.log(err);
+});
+
+process.on('uncaughtException', function(err) {
+    console.log('process.on handler');
+    console.log(err);
 });
 
 
