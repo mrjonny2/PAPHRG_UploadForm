@@ -54,11 +54,18 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(express.static(__dirname + '/public'));
 	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'xxyidooidfuie78889duvdjnsdf9ex', store: new express.session.MemoryStore({ reapInterval: -1 }) }));
+	app.use(express.session({
+		secret: 'xxyidooidfuie78889duvdjnsdf9ex',
+		rolling: true,
+		store: new express.session.MemoryStore({
+			reapInterval: -1
+		})
+	}));
 	app.use(express.errorHandler());
 });
 
 app.get('/', function(req, res) {
+	console.log(req.session)
 	res.render('index', {session_id: req.session.id});
 });
 
