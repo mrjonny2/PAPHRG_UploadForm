@@ -40,7 +40,7 @@ var express     = require('express'),
 	http        = require('http'),
 	app         = express(),
 	server      = http.createServer(app),
-	io          = require('socket.io').listen(server).set('log level', 1),
+	io          = require('socket.io').listen(server),
 	formidable  = require('formidable');
 var fs = require("fs");
 
