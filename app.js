@@ -56,7 +56,6 @@ app.configure(function(){
 	app.use(express.cookieParser());
 	app.use(express.session({
 		secret: 'xxyidooidfuie78889duvdjnsdf9ex',
-		rolling: true,
 		store: new express.session.MemoryStore({
 			reapInterval: -1
 		})
