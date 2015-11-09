@@ -89,9 +89,6 @@ app.post('/', function(req, res) {
 			.on('file', function(field, file) {
 				console.log(field, file);
 				files.push([field, file]);
-				logger.info(files)
-				console.log(files[0]);
-				console.log(files);
 			})
 			.on('progress', function(bytesReceived, bytesExpected) {
 				var filesize = (bytesExpected / 1024 / 1024).toFixed(1);
@@ -102,6 +99,10 @@ app.post('/', function(req, res) {
 				logger.info('successful upload!');
 				fullName = charStrip(fields[0][1])
 				fileType = charStrip(fields[1][1])
+				for (i = 0; i < files.length; i++) {
+					console.log("this is file number " + i)
+    				console.log(files[i])
+				}
 				originalFileName = (files[0][1].name)
 				strippedFileName = charStrip(files[0][1].name)
 				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + originalFileName
@@ -120,10 +121,7 @@ app.post('/', function(req, res) {
 				});
 				res.render('upload', {fields: fields, files: files});
 			})
-			.parse(req, function(){
-				logger.info(files)
-				console.log(files)
-			});
+			.parse(req, function(){});
 });
 
 server.listen(app.get('port'), function(){
