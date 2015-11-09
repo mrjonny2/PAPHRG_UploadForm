@@ -1,4 +1,7 @@
+
 var winston = require('winston');
+
+
 
 // Requiring `winston-papertrail` will expose
 // `winston.transports.Papertrail`
@@ -43,25 +46,26 @@ var express     = require('express'),
 	io          = require('socket.io').listen(server),
 	formidable  = require('formidable');
 var fs = require("fs");
+var morgan = require('morgan')
+var methodOverride = require('method-override')
+var serveStatic = require('serve-static')
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
+var errorhandler = require('errorhandler')
 
-
-app.configure(function(){
-	app.set('port', process.env.PORT || 80);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'jade');
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.methodOverride());
-	app.use(express.static(__dirname + '/public'));
-	app.use(express.cookieParser());
-	app.use(express.session({
-		secret: 'xxyidooidfuie78889duvdjnsdf9ex',
-		store: new express.session.MemoryStore({
-			reapInterval: -1
-		})
-	}));
-	app.use(express.errorHandler());
-});
+app.set('port', process.env.PORT || 80);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use(morgan('combined'));
+app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(serveStatic(__dirname + '/public'));
+app.use(cookieParser());
+app.use(session({
+	secret: 'xxyidooidfuie78889duvdjnsdf9ex',
+	resave: false,
+	saveUninitialized: true
+}));
+app.use(errorhandler())
 
 app.get('/', function(req, res) {
 	console.log(req.session)
@@ -74,7 +78,8 @@ app.post('/', function(req, res) {
 			files           = [],
 			fields          = [];
 
-		var uploadDir  = '/googleDrive/MEASURE16/OnlineUploads';
+		//var uploadDir  = '/googleDrive/MEASURE16/OnlineUploads';
+		var uploadDir  = 'uploads';
 		form.uploadDir  = uploadDir;
 		form
 			.on('field', function(field, value) {
