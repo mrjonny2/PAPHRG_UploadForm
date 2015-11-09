@@ -134,11 +134,11 @@ server.listen(app.get('port'), function(){
     console.log(err);
 });
 
-process.on('uncaughtException', function(err) {
+/*process.on('uncaughtException', function(err) {
     console.log('process.on handler');
     console.log(err);
 });
-
+*/
 
 
 function charStrip(string){
