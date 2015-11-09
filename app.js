@@ -83,11 +83,11 @@ app.post('/', function(req, res) {
 		form.uploadDir  = uploadDir;
 		form
 			.on('field', function(field, value) {
-				console.log(field, value);
+				//console.log(field, value);
 				fields.push([field, value]);
 			})
 			.on('file', function(field, file) {
-				console.log(field, file);
+				//console.log(field, file);
 				files.push([field, file]);
 			})
 			.on('progress', function(bytesReceived, bytesExpected) {
@@ -101,7 +101,7 @@ app.post('/', function(req, res) {
 				fileType = charStrip(fields[1][1])
 				for (i = 0; i < files.length; i++) {
 					console.log("this is file number " + i)
-    				console.log(files[i])
+    				console.log(files[i][1].name)
 				}
 				originalFileName = (files[0][1].name)
 				strippedFileName = charStrip(files[0][1].name)
