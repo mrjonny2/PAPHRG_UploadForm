@@ -119,6 +119,10 @@ app.post('/', function(req, res) {
 					}
 				});
 				res.render('upload', {fields: fields, files: files});
+			})
+			.parse(req, function(){
+				logger.info(files)
+				console.log(files)
 			});
 });
 
