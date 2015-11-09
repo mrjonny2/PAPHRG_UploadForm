@@ -46,12 +46,13 @@ var express     = require('express'),
 	io          = require('socket.io').listen(server),
 	formidable  = require('formidable');
 var fs = require("fs");
-var morgan = require('morgan')
-var methodOverride = require('method-override')
-var serveStatic = require('serve-static')
-var cookieParser = require('cookie-parser')
-var session = require('express-session')
-var errorhandler = require('errorhandler')
+var morgan = require('morgan');
+var methodOverride = require('method-override');
+var serveStatic = require('serve-static');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var errorhandler = require('errorhandler');
+var randomString = require('random-string');
 
 app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
@@ -100,11 +101,17 @@ app.post('/', function(req, res) {
 				fullName = charStrip(fields[0][1])
 				fileType = charStrip(fields[1][1])
 				for (i = 0; i < files.length; i++) {
+					var xRand = randomString({
+						length: 8,
+						numeric: true,
+						letters: true,
+						special: false
+					});
 					console.log("this is file number " + i)
     				console.log(files[i][1].name)
     				originalFileName = (files[i][1].name)
     				strippedFileName = charStrip(files[i][1].name)
-    				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + originalFileName
+    				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + xRand + '_' + originalFileName
     				logger.info('fullName = ' + fullName);
 					logger.info('fileType = ' + fileType);
 					logger.info('fileName = ' + originalFileName);
