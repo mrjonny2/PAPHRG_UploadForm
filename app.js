@@ -121,9 +121,7 @@ app.post('/', function(req, res) {
 			});
 		form.parse(req, function(){
 			logger.info(files)
-			logger.info(files[0][1].path)
 			console.log(files)
-			console.log(files[0][1].path)
 		});
 });
 
