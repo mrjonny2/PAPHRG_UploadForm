@@ -102,23 +102,23 @@ app.post('/', function(req, res) {
 				for (i = 0; i < files.length; i++) {
 					console.log("this is file number " + i)
     				console.log(files[i][1].name)
+    				originalFileName = (files[i][1].name)
+    				strippedFileName = charStrip(files[i][1].name)
+    				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + originalFileName
+    				logger.info('fullName = ' + fullName);
+					logger.info('fileType = ' + fileType);
+					logger.info('fileName = ' + originalFileName);
+					fs.rename(files[i][1].path, newFileName, function (err) {
+						if (err){
+							logger.error('err = ' + err);
+							console.log('err = ' + err)
+						}
+						else{
+							logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+							console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+						}
+					});
 				}
-				originalFileName = (files[0][1].name)
-				strippedFileName = charStrip(files[0][1].name)
-				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + originalFileName
-				logger.info('fullName = ' + fullName);
-				logger.info('fileType = ' + fileType);
-				logger.info('fileName = ' + originalFileName);
-				fs.rename(files[0][1].path, newFileName, function (err) {
-					if (err){
-						logger.error('err = ' + err);
-						console.log('err = ' + err)
-					}
-					else{
-						logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
-						//console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
-					}
-				});
 				res.render('upload', {fields: fields, files: files});
 			})
 			.parse(req, function(){});
