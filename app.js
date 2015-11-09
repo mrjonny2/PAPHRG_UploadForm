@@ -91,6 +91,7 @@ app.post('/', function(req, res) {
 				files.push([field, file]);
 				logger.info(files)
 				console.log(files[0]);
+				console.log(files);
 			})
 			.on('progress', function(bytesReceived, bytesExpected) {
 				var filesize = (bytesExpected / 1024 / 1024).toFixed(1);
@@ -119,10 +120,6 @@ app.post('/', function(req, res) {
 				});
 				res.render('upload', {fields: fields, files: files});
 			});
-		form.parse(req, function(){
-			logger.info(files)
-			console.log(files)
-		});
 });
 
 server.listen(app.get('port'), function(){
