@@ -107,6 +107,7 @@ app.post('/', function(req, res) {
 						special: false
 					});
 					console.log("this is file number " + i)
+					console.log(files[i])
     				console.log(files[i][1].name)
     				originalFileName = (files[i][1].name)
     				strippedFileName = charStrip(files[i][1].name)
