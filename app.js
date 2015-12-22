@@ -1,4 +1,3 @@
-
 var winston = require('winston');
 
 
@@ -22,6 +21,7 @@ var myCustomLevels = {
 		error: 'red'
 	}
 };
+
 var logger = new winston.Logger({
 	transports: [
 		new winston.transports.Papertrail({
@@ -78,7 +78,7 @@ app.post('/', function(req, res) {
 			files           = [],
 			fields          = [];
 
-		var uploadDir  = '/mnt/gdrive/MEASURE16/OnlineUploads';
+		var uploadDir  = '/googleDrive/MEASURE16/OnlineUploads';
 		//var uploadDir  = 'uploads';
 		form.uploadDir  = uploadDir;
 		form
@@ -114,16 +114,18 @@ app.post('/', function(req, res) {
     				logger.info('fullName = ' + fullName);
 					logger.info('fileType = ' + fileType);
 					logger.info('fileName = ' + originalFileName);
-					copyFile(files[i][1].path, newFileName, function (err) {
-						if (err){
-							logger.error('err = ' + err);
-							console.log('err = ' + err)
-						}
-						else{
-							logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
-							console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
-						}
-					});
+					setTimeout(function() {
+						fs.rename(files[i][1].path, newFileName, function (err) {
+							if (err){
+								logger.error('err = ' + err);
+								console.log('err = ' + err)
+							}
+							else{
+								logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+								console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+							}
+						});
+					}, 2000);
 				}
 				res.render('upload', {fields: fields, files: files});
 			})
@@ -148,38 +150,3 @@ function charStrip(string){
 	strippedString = string.replace(/[^a-zA-Z0-9]/g,'_');
 	return strippedString;
 }
-
-function copyFile(source, target, cb) {
-  var cbCalled = false;
-
-  var rd = fs.createReadStream(source);
-  rd.on("error", function(err) {
-    done(err);
-  });
-  var wr = fs.createWriteStream(target);
-  wr.on("error", function(err) {
-    done(err);
-  });
-  wr.on("close", function(ex) {
-    fs.unlinkSync(source, function(error) {
-    	if (error){
-			logger.error('err = ' + error);
-			console.log('err = ' + error);
-			done(error);
-		}else{
-			done();
-		}
-    });
-  });
-  rd.pipe(wr);
-
-  function done(err) {
-    if (!cbCalled) {
-      cb(err);
-      cbCalled = true;
-    }
-  }
-}
-
-
-
