@@ -121,6 +121,12 @@ app.post('/', function(req, res) {
 							if (err){
 								logger.error('err = ' + err);
 								console.log('err = ' + err)
+								errorString = fileUploadData.path + '\nShould have been saved as\n' + newFileName;
+								fs.writeFile(newFileName, errorString, function (err) {
+        							if (err){
+        								console.log('It\'s saved! in same location.');
+        							}
+    							});
 							}
 							else{
 								logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
