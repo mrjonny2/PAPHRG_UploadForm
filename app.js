@@ -22,7 +22,6 @@ var myCustomLevels = {
 		error: 'red'
 	}
 };
-
 var logger = new winston.Logger({
 	transports: [
 		new winston.transports.Papertrail({
@@ -79,7 +78,7 @@ app.post('/', function(req, res) {
 			files           = [],
 			fields          = [];
 
-		var uploadDir  = '/googleDrive/MEASURE16/OnlineUploads';
+		var uploadDir  = '/mnt/gdrive/MEASURE16/OnlineUploads';
 		//var uploadDir  = 'uploads';
 		form.uploadDir  = uploadDir;
 		form
@@ -115,7 +114,7 @@ app.post('/', function(req, res) {
     				logger.info('fullName = ' + fullName);
 					logger.info('fileType = ' + fileType);
 					logger.info('fileName = ' + originalFileName);
-					fs.rename(files[i][1].path, newFileName, function (err) {
+					copyFile(files[i][1].path, newFileName, function (err) {
 						if (err){
 							logger.error('err = ' + err);
 							console.log('err = ' + err)
@@ -150,7 +149,37 @@ function charStrip(string){
 	return strippedString;
 }
 
+function copyFile(source, target, cb) {
+  var cbCalled = false;
 
+  var rd = fs.createReadStream(source);
+  rd.on("error", function(err) {
+    done(err);
+  });
+  var wr = fs.createWriteStream(target);
+  wr.on("error", function(err) {
+    done(err);
+  });
+  wr.on("close", function(ex) {
+    fs.unlinkSync(source, function(error) {
+    	if (error){
+			logger.error('err = ' + error);
+			console.log('err = ' + error);
+			done(error);
+		}else{
+			done();
+		}
+    });
+  });
+  rd.pipe(wr);
+
+  function done(err) {
+    if (!cbCalled) {
+      cb(err);
+      cbCalled = true;
+    }
+  }
+}
 
 
 
