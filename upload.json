@@ -1,0 +1,28 @@
+[ 'upload',
+File {
+  domain: null,
+  _events: {},
+  _eventsCount: 0,
+  _maxListeners: undefined,
+  size: 1488,
+  path: '/mnt/gdrive/MEASURE16/OnlineUploads/upload_e1cbdc1efafc888bba9a505410e3879e',
+  name: 'README.md',
+  type: 'text/markdown',
+  hash: null,
+  lastModifiedDate: Tue Dec 22 2015 06:50:02 GMT-0500 (EST),
+  _writeStream: 
+   WriteStream {
+     _writableState: [Object],
+     writable: false,
+     domain: null,
+     _events: {},
+     _eventsCount: 0,
+     _maxListeners: undefined,
+     path: '/mnt/gdrive/MEASURE16/OnlineUploads/upload_e1cbdc1efafc888bba9a505410e3879e',
+     fd: null,
+     flags: 'w',
+     mode: 438,
+     start: undefined,
+     pos: undefined,
+     bytesWritten: 1488,
+     closed: true } } ]
