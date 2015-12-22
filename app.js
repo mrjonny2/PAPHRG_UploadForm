@@ -1,3 +1,4 @@
+
 var winston = require('winston');
 
 
@@ -114,18 +115,16 @@ app.post('/', function(req, res) {
     				logger.info('fullName = ' + fullName);
 					logger.info('fileType = ' + fileType);
 					logger.info('fileName = ' + originalFileName);
-					setTimeout(function() {
-						fs.rename(files[i][1].path, newFileName, function (err) {
-							if (err){
-								logger.error('err = ' + err);
-								console.log('err = ' + err)
-							}
-							else{
-								logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
-								console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
-							}
-						});
-					}, 2000);
+					fs.rename(files[i][1].path, newFileName, function (err) {
+						if (err){
+							logger.error('err = ' + err);
+							console.log('err = ' + err)
+						}
+						else{
+							logger.debug('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+							console.log('A file was successfully uploaded by:\n' + fullName + '\nThe file was a ' + fileType + '\nThe file was saved to:\n' + newFileName);
+						}
+					});
 				}
 				res.render('upload', {fields: fields, files: files});
 			})
@@ -150,3 +149,7 @@ function charStrip(string){
 	strippedString = string.replace(/[^a-zA-Z0-9]/g,'_');
 	return strippedString;
 }
+
+
+
+
