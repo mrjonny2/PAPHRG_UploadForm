@@ -108,15 +108,15 @@ app.post('/', function(req, res) {
 					});
 					console.log("this is file number " + i)
 					console.log(files[i])
-    				console.log(files[i][1].name)
-    				originalFileName = (files[i][1].name)
-    				strippedFileName = charStrip(files[i][1].name)
+    				console.log(files[i][0].name)
+    				originalFileName = (files[i][0].name)
+    				strippedFileName = charStrip(files[i][0].name)
     				newFileName = uploadDir + '/' + fullName + '_' + fileType + '_' + xRand + '_' + originalFileName
     				logger.info('fullName = ' + fullName);
 					logger.info('fileType = ' + fileType);
 					logger.info('fileName = ' + originalFileName);
 					setTimeout(function() {
-						fs.rename(files[i][1].path, newFileName, function (err) {
+						fs.rename(files[i][0].path, newFileName, function (err) {
 							if (err){
 								logger.error('err = ' + err);
 								console.log('err = ' + err)
